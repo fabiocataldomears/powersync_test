@@ -34,8 +34,6 @@ Future<void> openPowerSyncDatabase() async {
     rethrow;
   }
 
-  db = PowerSyncDatabase(schema: schema, path: dbPath);
-  await db.initialize();
   _connectInBackground();
 }
 
