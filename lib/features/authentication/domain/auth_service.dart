@@ -23,6 +23,15 @@ class AuthService {
   Future<bool> hasValidSession() async {
     return await _credentialsManager.hasValidCredentials();
   }
+
+  /// Returns the currently stored credentials (if any). Null if not logged in.
+  Future<Credentials?> getStoredCredentials() async {
+    try {
+      return await _credentialsManager.credentials();
+    } catch (_) {
+      return null;
+    }
+  }
 }
 
 final authServiceProvider = Provider((ref) => AuthService());

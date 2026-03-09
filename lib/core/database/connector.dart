@@ -37,21 +37,22 @@ class AppConnector extends PowerSyncBackendConnector {
       for (final op in transaction.crud) {
         debugPrint('[PowerSync]   op=${op.op.name} table=${op.table} id=${op.id} data=${op.opData}');
 
-        // Read-only tables managed by server-side triggers — never upload.
-        const readOnlyTables = {'combined_user_data'};
+        // Read-only tables managed by server-side triggers or direct Supabase
+        // writes — PowerSync must never upload changes for these.
+        const readOnlyTables = {'users', 'combined_user_and_repair', 'combined_user_data'};
         if (readOnlyTables.contains(op.table)) {
           debugPrint('[PowerSync]   skipping read-only table: ${op.table}');
           continue;
         }
 
-        // Parse id to int because Supabase column is bigint.
-        final numericId = int.tryParse(op.id) ?? op.id;
+        // All remaining writable tables (e.g. repair_request) use UUID/text PKs.
+        final id = op.id;
 
         switch (op.op) {
           case UpdateType.put:
             // INSERT or full REPLACE
             await _supabase.from(op.table).upsert({
-              'id': numericId,
+              'id': id,
               ...?op.opData,
             });
           case UpdateType.patch:
@@ -59,9 +60,9 @@ class AppConnector extends PowerSyncBackendConnector {
             await _supabase
                 .from(op.table)
                 .update(op.opData!)
-                .eq('id', numericId);
+                .eq('id', id);
           case UpdateType.delete:
-            await _supabase.from(op.table).delete().eq('id', numericId);
+            await _supabase.from(op.table).delete().eq('id', id);
         }
       }
 
