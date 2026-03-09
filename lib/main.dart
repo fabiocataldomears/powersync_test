@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:powersync_test/core/database/powersync.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:powersync_test/features/navigation/providers/go_router_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize PowerSync
+  await Supabase.initialize(
+    url: 'https://cioieazmebjgoqcwpntm.supabase.co',
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNpb2llYXptZWJqZ29xY3dwbnRtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI1MzUxMDcsImV4cCI6MjA4ODExMTEwN30.8IPJj34L3g8zOchfF8vuz8w0RSwzzRaR25rEAawSuN4',
+  );
+
   await openPowerSyncDatabase();
 
   runApp(ProviderScope(child: MyApp()));

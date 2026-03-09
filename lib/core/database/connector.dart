@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:powersync/powersync.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-final _supabase = Supabase.instance.client;
+SupabaseClient get _supabase => Supabase.instance.client;
 
 /// Backend connector responsible for:
 ///  1. Providing credentials so PowerSync can stream changes from your server.
@@ -13,7 +13,7 @@ class AppConnector extends PowerSyncBackendConnector {
       'https://69a844447c4f8b306a18c12e.powersync.journeyapps.com';
 
   /// Development token gerado no PowerSync Dashboard.
-  static const _devToken = 'eyJhbGciOiJSUzI1NiIsImtpZCI6InBvd2Vyc3luYy1kZXYtMzIyM2Q0ZTMifQ.eyJzdWIiOiJtb25kYXkiLCJpYXQiOjE3NzMwNDg0NjIsImlzcyI6Imh0dHBzOi8vcG93ZXJzeW5jLWFwaS5qb3VybmV5YXBwcy5jb20iLCJhdWQiOiJodHRwczovLzY5YTg0NDQ0N2M0ZjhiMzA2YTE4YzEyZS5wb3dlcnN5bmMuam91cm5leWFwcHMuY29tIiwiZXhwIjoxNzczMDkxNjYyfQ.fuxnCv77g-TNI7UGJUCroynmSd7z96BkLzT8VjK-Jxb1aUb-Utif7RlTUN6ozFbVCj94bBxB9OGlyixshjid7MYgVz_i4HTCC8bxRvZISgquFLd3vD46TJ9LRL_uS6Z2rVhJkRrhEYSiU24lpDG4zFEonREoEL6UiawOCpWDdz0BQRtQXJeg36AO6mwNYZOZvR2hHpEbR0qXIo1fWWQOGEFNItD2LBs9TeI78-4aeOVAwz0EZFAp5_peMbl8e-JOIx8bTHKJmS4JjJq2jPzP2ErEOfDucqYzaIErPmz9dnER4fqlOaD17SmX4MCCFEP4V79Xj8_5eRla1C4MeS5I9w';
+  static const _devToken = 'eyJhbGciOiJSUzI1NiIsImtpZCI6InBvd2Vyc3luYy1kZXYtMzIyM2Q0ZTMifQ.eyJzdWIiOiJtb25kYXkgdG9rZW4iLCJpYXQiOjE3NzMwNTg0NTYsImlzcyI6Imh0dHBzOi8vcG93ZXJzeW5jLWFwaS5qb3VybmV5YXBwcy5jb20iLCJhdWQiOiJodHRwczovLzY5YTg0NDQ0N2M0ZjhiMzA2YTE4YzEyZS5wb3dlcnN5bmMuam91cm5leWFwcHMuY29tIiwiZXhwIjoxNzczMTAxNjU2fQ.NFS8aarwt63-FCh1d2qjTN06EVrFKFfbqI50iLxuDLoVfh-qNl7S9wJNo26Wn6oyWsdNCAlnT4c2KMLcQMe--lGsvUSBEnS9PgaH3lfSfX-Ny15rD0d_aEO6Pgo4YIiHqkg_HQAtpUpKrKxphpsIN1ZEHsdwtTfjaoY7hy5iO8QRXMsaUbMIsL49igeWQqzLG1IKWO5o-lhFhb0RTI-3O0oI7_gJb-m3yWNLuO9PbKlVG6K8F2E0ORjcF-roaQEr1e0Ztc_JcuQk9RPZlSYSSbs5GpseC5BWkXFTfAu2CuMrz9wsVIdYJmeJerAJ3pzgTJdeeGPStUQ92zvMuvqTHQ';
 
   @override
   Future<PowerSyncCredentials?> fetchCredentials() async {
