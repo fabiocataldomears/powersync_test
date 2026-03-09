@@ -28,6 +28,8 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        manifestPlaceholders["auth0Domain"] = "mearsenable.uk.auth0.com"
+        manifestPlaceholders["auth0Scheme"] = "myapp"
     }
 
     buildTypes {

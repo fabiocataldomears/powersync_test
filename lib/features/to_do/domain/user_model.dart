@@ -27,5 +27,6 @@ class UserModel {
   }
 
   @override
-  String toString() => 'User(id: $id, firstName: $firstName, userId: $userId, favoriteColor: $favoriteColor)';
+  String toString() =>
+      'User(id: $id, firstName: $firstName, userId: $userId, favoriteColor: $favoriteColor)';
 }
