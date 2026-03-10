@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:powersync_test/features/authentication/providers/auth_provider.dart';
+import 'package:powersync_test/features/authentication/providers/auth_notifier.dart';
 
 class TermsScreen extends ConsumerStatefulWidget {
   const TermsScreen({super.key});
@@ -77,7 +77,7 @@ class TermsScreenState extends ConsumerState<TermsScreen> {
                         width: double.infinity * 0.8,
                         child: ElevatedButton(
                           onPressed: hasScrolledToBottomOfTerms
-                              ? () => ref.read(authProvider.notifier).signIn()
+                              ? () => ref.read(authNotifier.notifier).signIn()
                               : null,
                           child: const Text("Accept Terms"),
                         ),

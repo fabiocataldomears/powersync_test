@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:powersync_test/features/authentication/providers/auth_provider.dart';
+import 'package:powersync_test/features/authentication/providers/auth_notifier.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -54,7 +54,7 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
                     OutlinedButton.icon(
                       onPressed: () {
                         // Trigger the logout logic in your provider
-                        ref.read(authProvider.notifier).signOut();
+                        ref.read(authNotifier.notifier).signOut();
                       },
                       icon: const Icon(Icons.logout),
                       label: const Text("Log Out"),

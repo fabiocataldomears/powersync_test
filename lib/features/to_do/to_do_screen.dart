@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:powersync_test/core/widgets/sync_status_icon.dart';
-import 'package:powersync_test/features/authentication/providers/auth_provider.dart';
+import 'package:powersync_test/features/authentication/providers/auth_notifier.dart';
 import 'package:powersync_test/features/repair_request/data/repair_request_repository.dart';
 
 class ToDoScreen extends ConsumerStatefulWidget {
@@ -22,7 +22,7 @@ class ToDoScreenState extends ConsumerState<ToDoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final authState = ref.watch(authProvider);
+    final authState = ref.watch(authNotifier);
     final userId = authState.auth0UserId;
     final requestsAsync = ref.watch(repairRequestListProvider);
 
@@ -95,7 +95,9 @@ class ToDoScreenState extends ConsumerState<ToDoScreen> {
                                           color: Colors.red,
                                         ),
                                         onPressed: () => ref
-                                            .read(repairRequestRepositoryProvider)
+                                            .read(
+                                              repairRequestRepositoryProvider,
+                                            )
                                             .deleteRepairRequest(req.id),
                                       ),
                                     ),
@@ -117,4 +119,3 @@ class ToDoScreenState extends ConsumerState<ToDoScreen> {
     );
   }
 }
-

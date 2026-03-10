@@ -49,10 +49,9 @@ class AuthNotifier extends Notifier<AuthState> {
 
         // Upsert profile independently — a Supabase error must NOT prevent login.
         try {
-          await ref.read(authRepositoryProvider).upsertUser(
-                auth0Id: auth0Id,
-                email: credentials.user.email,
-              );
+          await ref
+              .read(authRepositoryProvider)
+              .upsertUser(auth0Id: auth0Id, email: credentials.user.email);
         } catch (e) {
           // Log but keep going — user is authenticated regardless.
           debugPrint('[Auth] upsertUser failed (non-fatal): $e');
@@ -80,6 +79,6 @@ class AuthNotifier extends Notifier<AuthState> {
   }
 }
 
-final authProvider = NotifierProvider<AuthNotifier, AuthState>(
+final authNotifier = NotifierProvider<AuthNotifier, AuthState>(
   AuthNotifier.new,
 );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:powersync_test/features/authentication/providers/auth_provider.dart';
+import 'package:powersync_test/features/authentication/providers/auth_notifier.dart';
 import 'package:powersync_test/features/to_do/to_do_screen.dart';
 import 'package:powersync_test/home_screen.dart';
 import 'package:powersync_test/terms_screen.dart';
@@ -25,8 +25,8 @@ class _RouterNotifier extends ChangeNotifier {
 }
 
 final _routerNotifierProvider = Provider<_RouterNotifier>((ref) {
-  final notifier = _RouterNotifier(ref.read(authProvider));
-  ref.listen<AuthState>(authProvider, (_, next) => notifier.update(next));
+  final notifier = _RouterNotifier(ref.read(authNotifier));
+  ref.listen<AuthState>(authNotifier, (_, next) => notifier.update(next));
   ref.onDispose(notifier.dispose);
   return notifier;
 });
